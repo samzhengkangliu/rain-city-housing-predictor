@@ -2,14 +2,13 @@
 import os
 
 from flask import Flask, request
-from routes.analysis_routes import register_analysis_routes
-from routes.data_routes import register_data_routes
+from src.routes.analysis_routes import register_analysis_routes
+from src.routes.data_routes import register_data_routes
 
 app = Flask(__name__)
 
 register_data_routes(app)
 register_analysis_routes(app)
-
 
 def create_app(test_config=None):
     # create and configure the app

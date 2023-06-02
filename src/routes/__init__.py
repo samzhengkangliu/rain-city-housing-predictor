@@ -1,2 +1,0 @@
-from .analysis_routes import register_analysis_routes
-from .data_routes import register_data_routes

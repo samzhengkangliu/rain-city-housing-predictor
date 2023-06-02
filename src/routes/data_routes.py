@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from utils.database import get_db_connection
+from src.utils.database import get_db_connection
 
 data_routes = Blueprint("data_routes", __name__)
 
