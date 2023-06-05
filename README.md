@@ -22,5 +22,32 @@ pip install -r requirements.txt
 
 4. You can navigate to http://localhost:5000 (or `8000` if you use `gunicorn`). Use `curl` or Postman to query the APIs
 
-## List of APIs you can use
-You can navigate to http://localhsot:5000/swagger for a list of APIs. (In progress work and sorry you can't directly interact with the swagger UI yet)
+## API Endpoints
+
+- POST /api/data/collect
+
+    Collects the house price dataset from Kaggle and stores it in the MongoDB database.
+
+- GET /api/analysis/trends
+
+    Returns an image displaying the overall price trends over time.
+
+- GET /api/analysis/price_vs_features
+
+    Returns an image displaying the price distribution based on different features.
+
+- GET /api/analysis/correlation_matrix
+
+    Returns an image displaying the correlation matrix among the features and price.
+
+- POST /api/analysis/predict
+
+    Accepts a JSON object containing the house features and returns the predicted price.
+
+- GET /api/health
+
+    Returns the health status of the app
+
+- GET /api/metrics
+  
+    Generate Prometheus metrics

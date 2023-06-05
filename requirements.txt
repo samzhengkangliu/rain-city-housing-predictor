@@ -35,6 +35,7 @@ packaging==23.1
 pandas==2.0.2
 Pillow==9.5.0
 pluggy==1.0.0
+prometheus-client==0.17.0
 prompt-toolkit==3.0.38
 pymongo==4.3.3
 pyparsing==3.0.9

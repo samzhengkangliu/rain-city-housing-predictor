@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
+from prometheus_client import Counter, generate_latest, Histogram, Summary
 from routes.analysis_routes import register_analysis_routes
 from routes.data_routes import register_data_routes
 from flask_swagger import swagger
@@ -37,6 +38,35 @@ def main():
 def echo_input():
     input_text = request.form.get("user_input", "")
     return "You entered: " + input_text
+
+
+@app.route("/api/health", methods=["GET"])
+def health_check():
+    return "", 200
+
+
+request_counter = Counter("flask_app_requests_total", "Total number of requests")
+request_duration = Histogram("flask_app_request_duration_seconds", "Request duration")
+response_size = Summary("flask_app_response_size_bytes", "Response size")
+
+
+@app.route("/api/metrics")
+def metrics():
+    data = generate_latest()
+    return data, 200, {"Content-Type": "text/plain"}
+
+
+@app.before_request
+def before_request():
+    # increase the request counter before each request
+    request_counter.inc()
+
+
+@app.after_request
+def after_request(response):
+    # record the response size after each request
+    response_size.observe(len(response.data))
+    return response
 
 
 @app.route("/swagger.json")
